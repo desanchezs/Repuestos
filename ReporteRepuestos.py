@@ -9,17 +9,16 @@ dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 from Reporte import Reporte
+
 # Lectura de los dos DataFrames
 pd.set_option('display.max_columns', None)
 path = dname
-df2019 = pd.read_excel(path + '\Repuestos2019.xlsx')
-df2020 = pd.read_excel(path + '\Repuestos2020.xlsx')
+df2019 = pd.read_excel(path + '\data\Repuestos2019.xlsx')
+df2020 = pd.read_excel(path + '\data\Repuestos2020.xlsx')
 df2019 = df2019.drop('DESCRIPCION CUENTA', 1)
 
 # Union de los dos DataFrames
 df = pd.concat([df2019, df2020], ignore_index=True)
-
-df['FECHA DE CIERRE'] = pd.to_datetime(df['FECHA DE CIERRE'])
 
 # Creacion de las columnas de Kilometraje y
 df.insert(loc=4, column='KILOMETRAJE', value=list(df['DESCRIPCION'].str.findall('\(([^)]+)').apply(', '.join).str.replace("KMS=", "").str.split(",")))
