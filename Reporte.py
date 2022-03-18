@@ -90,5 +90,3 @@ class Reporte(object):
 
         valor_total = df_cuenta_filtrada['$ TOTAL'].sum()
         return valor_total
-    
-    def 
